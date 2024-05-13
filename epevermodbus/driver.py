@@ -33,17 +33,15 @@ class EpeverChargeController(minimalmodbus.Instrument):
     ]
 
     def __init__(self, portname, slaveaddress, baudrate=115200):
-        ser = serial.Serial('/dev/ttyUSB0', 115200, rtscts=True,dsrdtr=True)
-        minimalmodbus.Instrument.__init__(self, ser)
-        #self.serial.baudrate = baudrate
+        minimalmodbus.Instrument.__init__(self, portname, slaveaddress)
+        self.serial.baudrate = baudrate
         self.serial.bytesize = 8
         self.serial.parity = serial.PARITY_NONE
         self.serial.stopbits = 1
         self.serial.timeout = 1
         self.mode = minimalmodbus.MODE_RTU
         self.clear_buffers_before_each_transaction = True
-        #self.serial.dsrdtr = True
-        #self.serial.rtscts = True
+
 
     @retry(wait_fixed=200, stop_max_attempt_number=5)
     def retriable_read_register(
