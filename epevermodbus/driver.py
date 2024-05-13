@@ -39,6 +39,7 @@ class EpeverChargeController(minimalmodbus.Instrument):
         self.serial.parity = serial.PARITY_NONE
         self.serial.stopbits = 1
         self.serial.timeout = 1
+        self.serial.dsrdtr = True
         self.mode = minimalmodbus.MODE_RTU
         self.clear_buffers_before_each_transaction = True
 
