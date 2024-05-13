@@ -33,14 +33,14 @@ class EpeverChargeController(minimalmodbus.Instrument):
     ]
 
     def __init__(self, portname, slaveaddress, baudrate=115200):
-        minimalmodbus.Instrument.__init__(self, portname, slaveaddress,rtscts=True, dsrdtr=True)
+        minimalmodbus.Instrument.__init__(self, portname, slaveaddress)
         self.serial.baudrate = baudrate
         self.serial.bytesize = 8
         self.serial.parity = serial.PARITY_NONE
         self.serial.stopbits = 1
         self.serial.timeout = 1
-        #self.serial.dsrdtr = True
-        #self.serial.rtscts = True
+        self.serial.dsrdtr = True
+        self.serial.rtscts = True
         self.mode = minimalmodbus.MODE_RTU
         self.clear_buffers_before_each_transaction = True
 
